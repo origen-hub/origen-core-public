@@ -1,0 +1,63 @@
+name: Deploy MkDocs to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install MkDocs + Material theme
+        run: |
+          pip install mkdocs-material
+
+      - name: Include files outside of docs_dir
+        run: |
+          cp CODE_OF_CONDUCT.md CONTRIBUTING.md SECURITY.md docs/
+          cp LICENSE docs/LICENSE.md
+          cp NOTICE docs/NOTICE.md
+          cp COPYRIGHT docs/COPYRIGHT.md
+
+      - name: Make about page the index.md
+        run: |
+          mv docs/ABOUT.md docs/index.md
+
+      - name: Build site
+        run: mkdocs build --clean
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

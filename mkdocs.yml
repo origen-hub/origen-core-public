@@ -1,0 +1,48 @@
+site_name: Origen Documentation
+site_description: Deterministic Workflow Planning and Portable Execution
+site_url: https://origen-hub.github.io/origen-core-public
+repo_url: https://github.com/origen-hub/origen-core-public
+repo_name: origen-core-public
+
+docs_dir: docs
+
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.sections
+    - navigation.top
+    - toc.integrate
+    - content.code.copy
+
+# Optional (makes the docs nicer)
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - tables
+  - fenced_code
+  - footnotes
+  - attr_list
+  - md_in_html
+
+nav:
+  - Home: index.md
+
+  - Overview:
+      - Primer: overview/origen-primer.md
+      - Value Statement: overview/value.md
+
+  - Architecture:
+      - Top-Level Overview: architecture/00-top-level.md
+
+  - Roadmap:
+      - MVP Details: roadmap/00-MVP.md
+
+  - Community:
+      - Code of Conduct: CODE_OF_CONDUCT.md
+      - Contributing: CONTRIBUTING.md
+      - Security Policy: SECURITY.md
+      - License: LICENSE
+      - Notice: NOTICE
+      - Copyright: COPYRIGHT
