@@ -1,3 +1,2 @@
 # Security Policy
-Report security issues privately to security@origen.pub (placeholder).
-
+Report security issues privately to stanislav.kim@gmail.com.
