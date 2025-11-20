@@ -25,7 +25,7 @@ FONT_CANDIDATES = [
 ]
 
 
-def load_font(size=12):
+def load_font(size=14):
     for path in FONT_CANDIDATES:
         try:
             return ImageFont.truetype(path, size=size)
