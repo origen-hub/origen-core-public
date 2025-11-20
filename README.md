@@ -114,7 +114,7 @@ Zero-trust stops being expensive.
 It becomes cheap.
 
 > Curious how?
-> Read **[Zero-Trust by Design](docs/public/security/zero-trust-by-design.md)**.
+> Read **[Zero-Trust by Design](https://origen-hub.github.io/origen-core-public/security/zero-trust-by-design/)**.
 
 ---
 
@@ -146,7 +146,7 @@ Every digest maps to:
 
 With this graph, organizations gain **instant, reconstructable lineage**.
 
-> Learn more: **[Automatic Digital Provenance](docs/public/security/adp/automatic-digital-provenance.md)**
+> Learn more: **[Automatic Digital Provenance](https://origen-hub.github.io/origen-core-public/security/adp/automatic-digital-provenance/)**
 
 ---
 
@@ -172,9 +172,8 @@ The architecture is public and stable; the codebase will follow.
 
 For now, start with:
 
-* **[Primer](docs/public/overview/origen-primer.md)**
-* **[Values](docs/public/overview/value-statement.md)**
-* **[Top-Level Architecture](docs/public/overview/00-top-level.md)**
+➡ **[Primer](https://origen-hub.github.io/origen-core-public/overview/origen-primer/)**
+➡ **[Values](https://origen-hub.github.io/origen-core-public/overview/value-statement/)**
 
 ---
 
@@ -184,7 +183,9 @@ OriGen is small, but the consequences are large.
 
 If you want to understand *why the system behaves the way it does*, begin here:
 
-➡ **[Architecture Overview](docs/public/architecture/00-top-level.md)**
+➡ **[Top-Level Architecture](https://origen-hub.github.io/origen-core-public/architecture/00-top-level/)**
+
+
 
 ---
 
