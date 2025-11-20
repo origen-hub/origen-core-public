@@ -204,4 +204,4 @@ ADP is the pattern that brings OriGen to the world.
 
 ---
 
-**Intrigued? Explore the [Architecture Overview](origen-architecture-top-level-overview).**
+**Intrigued? Explore the [Architecture Overview][origen-architecture-top-level-overview].**

@@ -35,3 +35,4 @@ nav:
   - ADP: security/adp/automatic-digital-provenance.md
   - Architecture: architecture/00-top-level.md
   - About: pages/about.md
+  - Glossary: pages/glossary.md
