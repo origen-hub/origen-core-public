@@ -41,7 +41,7 @@ def load_font(size=22):
     )
 
 
-FONT = load_font(size=16)
+FONT = load_font(size=14)
 PADDING = 30
 
 
