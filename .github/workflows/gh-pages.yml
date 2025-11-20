@@ -28,13 +28,6 @@ jobs:
         run: |
           pip install mkdocs-material mkdocs-autorefs
 
-      - name: Include files outside of docs_dir
-        run: |
-          cp CODE_OF_CONDUCT.md CONTRIBUTING.md SECURITY.md docs/public/pages
-          cp LICENSE docs/public/pages/LICENSE.md
-          cp NOTICE docs/public/pages/NOTICE.md
-          cp COPYRIGHT docs/public/pages/COPYRIGHT.md
-
       - name: Build site
         run: mkdocs build --clean
 
