@@ -26,7 +26,7 @@ jobs:
 
       - name: Install MkDocs + Material theme
         run: |
-          pip install mkdocs-material mkdocs-autorefs
+          pip install pillow mkdocs-material mkdocs-autorefs
 
       - name: Render diagrams
         run: ./scripts/text-to-image.py
