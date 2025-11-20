@@ -48,7 +48,6 @@ The paths in-front of you are:
 * **[Primer][origen-executive-overview]** - for the big idea
 * **[Value Statement][origen-value-statement]** - for philosophical reason
 * **[Top-Level Architecture][origen-architecture-top-level-overview]** — for a peek under the hood
-* **[MVP][origen-minimum-viable-product]** — for roadmap
 
 ---
 

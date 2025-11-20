@@ -111,7 +111,7 @@ Cheap zero-trust creates the preconditions for something deeper:
 
 > **Provenance no longer needs to be engineered — it becomes inherent.**
 
-This leads directly into **[Automatic Digital Provenance (ADP)][]**, introduced in the ADP document.
+This leads directly into **[Automatic Digital Provenance (ADP)][automatic-digital-provenance-adp]**, introduced in the ADP document.
 
 ---
 
