@@ -28,6 +28,9 @@ jobs:
         run: |
           pip install mkdocs-material mkdocs-autorefs
 
+      - name: Render diagrams
+        run: ./scripts/text-to-image.py
+
       - name: Build site
         run: mkdocs build --clean
 

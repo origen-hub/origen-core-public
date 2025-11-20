@@ -27,6 +27,8 @@ Traditional zero-trust frameworks exist because the system cannot reliably descr
 
 ---
 
+![Architectures That Don’t Drift](../images/zero-trust-side-by-side.png "Architectures That Don’t Drift")
+
 ## 2. The OriGen Difference: Architectures That Don’t Drift
 
 OriGen does not enforce zero-trust. It simply avoids the architectural conditions that make verification expensive.

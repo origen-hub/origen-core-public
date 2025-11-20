@@ -1,0 +1,34 @@
+┌──────────────────┐
+│ Navigator /      │
+│ Backpack (Git)   │
+└───────┬──────────┘
+        │ edit/pin upstream digest
+        ▼
+┌──────────────────┐
+│   Commit C1      │
+│ (definition)     │
+└───────┬──────────┘
+        │ build triggered by CI
+        ▼
+┌──────────────────┐
+│    Digest D1     │
+│   (OCI image)    │
+└───────┬──────────┘
+        │ recorded in manifest
+        ▼
+┌──────────────────┐
+│   Commit C2      │
+│   (manifest)     │
+└───────┬──────────┘
+        │ referenced by Maps
+        ▼
+┌──────────────────┐
+│       Map        │
+│ (uses C2 ref)    │
+└───────┬──────────┘
+        │ planned by Compass
+        ▼
+┌──────────────────┐
+│      Route       │
+│  (immutable)     │
+└──────────────────┘

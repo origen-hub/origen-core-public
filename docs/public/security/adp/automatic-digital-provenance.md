@@ -59,7 +59,12 @@ ADP is the natural result.
 
 ADP describes a simple chain:
 
-**Navigator/Backpack** → (built) → **Digest** → (committed) → **Manifest** → (referenced) → **Map** → (planned) → **Route**
+![The ADP Model](../../images/adp-graph.png "The ADP Model")
+
+
+Graph View (Alternate Representation):
+
+![Alternate Representation](../../images/adp-graph.png "The ADP Model")
 
 Each link is:
 
@@ -142,6 +147,8 @@ Because:
 4. Enumerate every affected workflow.
 5. Generate automated PRs to update each Map to a safe commit.
 6. Produce impact reports for compliance and security teams.
+
+![Downsweep in action](../../images/adp-downsweep.png "Downsweep in action")
 
 > **Downsweep is ADP in action — automated dependency discovery at organizational scale.**
 

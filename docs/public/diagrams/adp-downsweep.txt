@@ -1,0 +1,23 @@
+Step 1: Identify vulnerable digest
+┌──────────────┐
+│  Digest D1   │  ◀─── scanner / CVE / policy engine
+└──────┬───────┘
+       │
+       │ find the manifest commit that published D1
+       ▼
+┌──────────────┐
+│  Commit C2   │  (manifest containing D1)
+└──────┬───────┘
+       │
+       │ search Maps that reference C2
+       ▼
+┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│   Map M1     │     │   Map M2     │ ... │   Map Mn     │
+└──────┬───────┘     └──────┬───────┘     └──────┬───────┘
+       │                    │                    │
+       │ open PRs           │ open PRs           │ open PRs
+       ▼                    ▼                    ▼
+ [M1 updated]          [M2 updated]          [Mn updated]
+
+= downsweep
+  (reverse dependency discovery + automated PR fan-out)

@@ -1,0 +1,9 @@
+Traditional Systems                      OriGen
+
+- implicit tools                         - tools declared in Maps/Navigators
+- mutable base images                    - toolchains pinned by digest
+- inherited host env                     - no environment inheritance
+- runtime discovery                      - no discovery during planning
+- hidden side effects                    - pure, side-effect-free planning
+- shared mutable state                   - immutable Route as intent
+- executors that reinterpret intent      - Guides translate only, never execute

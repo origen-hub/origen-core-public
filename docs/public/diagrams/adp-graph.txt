@@ -1,0 +1,33 @@
+          (Git repo: toolchains)
+          ┌──────────────────┐
+          │ Navigator A      │
+          └───────┬──────────┘
+                  │ edit (pin new upstream digest)
+                  ▼
+            ┌──────────────┐
+            │  Commit C1   │
+            │ (navigator)  │
+            └──────┬───────┘
+                   │ build triggered by CI
+                   ▼
+            ┌──────────────┐
+            │   Digest D1  │
+            └──────┬───────┘
+                   │ recorded into manifest
+                   ▼
+            ┌──────────────┐
+            │  Commit C2   │
+            │ (manifest)   │
+            └──────┬───────┘
+                   │ referenced by Maps
+     ┌─────────────┴────────────┐
+     │                          │
+     ▼                          ▼
+┌────────────┐            ┌────────────┐
+│   Map M1   │            │   Map M2   │
+└────┬───────┘            └─────┬──────┘
+     │ planned                  │ planned
+     ▼                          ▼
+┌────────────┐            ┌────────────┐
+│  Route R1  │            │  Route R2  │
+└────────────┘            └────────────┘
