@@ -157,8 +157,6 @@ From there, the process is:
 
 ![Downsweep in action](../../images/adp-downsweep.png "Downsweep in action")
 
-> **Downsweep is ADP in action — automated dependency discovery at organizational scale.**
-
 It is simple, mechanical, and requires no human knowledge transfer.
 
 ---
@@ -203,3 +201,7 @@ Together they offer:
 
 OriGen is the architecture that makes ADP possible.
 ADP is the pattern that brings OriGen to the world.
+
+---
+
+**Intrigued? Explore the [Architecture Overview](origen-architecture-top-level-overview).**
