@@ -26,9 +26,10 @@ OriGen does not execute tools directly. It:
 * loads Navigators
 * resolves dependencies
 * normalizes the workflow
-* selects sidecars
+* selects Backpacks
 * validates structure
-* produces a deterministic **IR (Execution Plan)**
+* produces a deterministic Route (IR)
+* Guide translates Route into native platform formats
 
 Execution is delegated to interchangeable backend drivers.
 
@@ -40,7 +41,7 @@ This keeps the system platform-agnostic, reproducible, and maintainable.
 
 ---
 
-## 2. The Compass, Maps, Navigators, Sidecars
+## 2. The Compass, Maps, Navigators, Backpacks, Routes, Guides
 
 OriGen uses a consistent metaphor to describe its components.
 
@@ -48,9 +49,8 @@ OriGen uses a consistent metaphor to describe its components.
 
 * Loads Maps
 * Loads Navigators
-* Resolves Sidecars
-* Compiles everything into IR
-
+* Resolves Backpacks
+* Compiles everything into a Route
 The Compass is the heart of OriGen’s planning model.
 
 ### Maps (Declarative Workflows)
@@ -73,13 +73,13 @@ Navigator files define:
 * entrypoints
 * argument templates
 * modes
-* sidecar requirements
+* backpack requirements
 
 They isolate tooling changes from workflows.
 
-### Sidecars (Immutable Resource Packs)
+### Backpacks
 
-Read-only, versioned bundles containing:
+Backpacks are immutable, versioned, read-only resource bundles carried into execution.
 
 * typesetting engines (LaTeX, typst, HTML→PDF engines, etc.)
 * ICC profiles
@@ -89,11 +89,20 @@ Read-only, versioned bundles containing:
 * validators
 * any future deterministic resource
 
-Sidecars provide stable execution environments independent of host systems.
+### Routes
+
+Intermediate Representation (IR): the deterministic, platform-neutral execution graph OriGen compiles from a Map.
+A Route defines *how* a workflow should run, independent of any backend system.
+
+### Guides
+
+Translates a Route into native backend execution formats (e.g., GitHub Actions, GitLab CI, Argo, Kubernetes, or local scripts).
+Guides perform *translation only* — OriGen does not run workflows.
 
 ---
 
 ## 3. Why This Architecture Exists
+@todo rewrite: domain agnostic now
 
 Modern publishing pipelines are diverse and fragmented:
 
@@ -160,23 +169,23 @@ Execution is delegated to a backend driver chosen by the user or environment.
 All backend drivers are **peers**.
 No backend derives from any other.
 
-> **About the IR.**
-> The IR is a structured, machine-readable execution plan describing steps, dependencies, required tools, and deterministic parameters. It is versioned, schema-validated, and serializable. The IR does not encode execution strategy — only intent and structure — ensuring stability across platforms and backends.
+> **About the Route.**
+> The Route is a structured, machine-readable execution plan describing steps, dependencies, required tools, and deterministic parameters. It is versioned, schema-validated, and serializable. The IR does not encode execution strategy — only intent and structure — ensuring stability across platforms and backends.
 
 ```
          Compass
-(Maps + Navigators → IR)
+(Maps + Navigators → Route)
              │
              ▼
-         IR (EP)
+         Route (IR)
              │
              ▼
  ┌────────────────────────────────────────────────────────────┐
- │                   Backend Drivers (Peers)                  │
+ │                  Guides(Backend Adapters)                  │
  │    (Each driver consumes IR and performs real execution)   │
- └───────┬──────────┬──────────┬────────────┬────────────┬────┘
-         │          │          │            │            │
-         ▼          ▼          ▼            ▼            ▼
+ └───────┬──────────┬──────────────┬────────┬────────────┬────┘
+         │          │              │        │            │
+         ▼          ▼              ▼        ▼            ▼
   Local Container   Local VM     CI/CD    Serverless   Enterprise
       Driver        Driver      Driver      Driver       Driver
 (development mode) (one-click)
@@ -203,7 +212,7 @@ Uses whatever OCI-compatible container engine the host provides.
 
 ### Local Runtime VM Backend (One-Click Mode)
 
-A sealed VM appliance containing a minimal container engine and sidecars.
+A sealed VM appliance containing a minimal container engine and backpacks.
 
 ### External Backend Drivers
 
