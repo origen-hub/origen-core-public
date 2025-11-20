@@ -13,5 +13,5 @@ Together, these concepts form the foundation of OriGen’s security posture.
 
 ## Documents
 
-* [Zero‑Trust‑by‑Design](./zero-trust-by-design.md)
-* [Automatic Digital Provenance (ADP)](./adp/automatic-digital-provenance.md)
+→ [Zero‑Trust‑by‑Design](./zero-trust-by-design.md)
+→ [Automatic Digital Provenance (ADP)](./adp/automatic-digital-provenance.md)

@@ -1,4 +1,4 @@
-# Automatic Digital Provenance (ADP)
+# # ADP Overview
 
 Automatic Digital Provenance is the structural result of OriGen’s deterministic, digest‑pinned workflow model.
 
@@ -15,6 +15,6 @@ This section contains the defining documents:
 
 ## Documents
 
-* [Automatic Digital Provenance](./automatic-digital-provenance.md)
+→ [Automatic Digital Provenance](./automatic-digital-provenance.md)
 
 ADP also introduces **downsweep**, the organizational reverse‑dependency capability made possible by ADP’s provenance graph.
