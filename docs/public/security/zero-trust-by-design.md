@@ -107,17 +107,40 @@ Reproducibility ceases to be a best-effort practice. It becomes a property of th
 
 Every tool and resource maps directly to its digest and definition. There is no hidden dependency surface.
 
-### 5.5 The Emergent Result: Automatic Provenance
-
-Cheap zero-trust creates the preconditions for something deeper:
 
 > **Provenance no longer needs to be engineered — it becomes inherent.**
 
-This leads directly into **[Automatic Digital Provenance (ADP)][automatic-digital-provenance-adp]**, introduced in the ADP document.
+
+## 6. The Maintenance Paradox
+
+Zero-trust in OriGen is cheap because everything is pinned: toolchains, resources, images, and every dependency surface that normally drifts.
+
+But that immediately raises a practical concern:
+
+> **If everything is pinned, won’t maintenance become impossible?**
+>
+> How do teams update dependencies?
+> How do organizations keep toolchains fresh?
+> How do security patches propagate?
+
+In traditional systems, immutability creates friction.
+Updates become manual, brittle, or operationally expensive.
+
+In OriGen, the opposite happens.
+Because everything is explicit, deterministic, and digest‑pinned:
+
+* every change is versioned,
+* every build produces a manifest commit,
+* every digest can be traced,
+* and every Map references exact commit hashes.
+
+The very same constraints that make zero‑trust cheap also make provenance automatic.
+
+This convergence leads directly into **[Automatic Digital Provenance (ADP)][automatic-digital-provenance-adp]**, introduced in the ADP document.
 
 ---
 
-## 6. Transition to ADP
+## 7. Transition to ADP
 
 OriGen did not set out to solve provenance. Instead, provenance emerged from a workflow model where:
 
