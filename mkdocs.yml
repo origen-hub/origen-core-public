@@ -30,7 +30,7 @@ markdown_extensions:
 nav:
   - Home: index.md
   - Primer: overview/origen-primer.md
-  - Value Statement: overview/value.md
+  - Value Statement: overview/value-statement.md
   - Zero-Trust-by-Design: security/zero-trust-by-design.md
   - ADP: security/adp/automatic-digital-provenance.md
   - Architecture: architecture/00-top-level.md
