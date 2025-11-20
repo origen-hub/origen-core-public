@@ -1,7 +1,7 @@
 # **README.md**
 
 <p align="center">
-  <img src="docs/public/images/origen-logo.png" width="120" alt="OriGen Logo">
+  <img src="docs/public/images/origen-logo.jpg" width="120" alt="OriGen Logo">
 </p>
 
 <h1 align="center">OriGen</h1>
@@ -73,7 +73,7 @@ Other systems execute them.
 
 ## Minimal Mental Model
 
-![](docs/public/images/origen-flow.png)
+![](https://origen-hub.github.io/origen-core-public/images/origen-flow.png)
 
 ---
 
@@ -114,7 +114,7 @@ Zero-trust stops being expensive.
 It becomes cheap.
 
 > Curious how?
-> Read **[Zero-Trust by Design](docs/public/security/zero-trust.md)**.
+> Read **[Zero-Trust by Design](docs/public/security/zero-trust-by-design.md)**.
 
 ---
 
@@ -146,7 +146,7 @@ Every digest maps to:
 
 With this graph, organizations gain **instant, reconstructable lineage**.
 
-> Learn more: **[Automatic Digital Provenance](docs/public/security/adp.md)**
+> Learn more: **[Automatic Digital Provenance](docs/public/security/adp/automatic-digital-provenance.md)**
 
 ---
 
