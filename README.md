@@ -199,16 +199,19 @@ Public docs are available; the public codebase will follow.
 
 ## Contributing
 
-OriGen welcomes:
+OriGen is in its early architectural phase.
+The implementation is private while the core model, documentation,
+and specifications stabilize.
 
-* feedback
-* discussions
-* Navigator / Backpack definitions
-* Guide adapters
-* security and provenance reviewers
+You can contribute today by:
 
-Open an issue or join the discussions.
-The project grows concentrically—start small, end inevitable.
+- opening issues
+- proposing improvements to the documentation
+- participating in design and security discussions
+- suggesting Navigator / Backpack use cases
+- reviewing concepts like Zero-Trust, ADP, and Downsweep
+
+Code contributions will open once the public implementation is ready.
 
 ---
 
