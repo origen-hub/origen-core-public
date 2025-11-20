@@ -173,6 +173,7 @@ The architecture is public and stable; the codebase will follow.
 For now, start with:
 
 ➡ **[Primer](https://origen-hub.github.io/origen-core-public/overview/origen-primer/)**
+
 ➡ **[Values](https://origen-hub.github.io/origen-core-public/overview/value-statement/)**
 
 ---
