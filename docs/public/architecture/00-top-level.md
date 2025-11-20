@@ -102,38 +102,44 @@ Guides perform *translation only* — OriGen does not run workflows.
 ---
 
 ## 3. Why This Architecture Exists
-@todo rewrite: domain agnostic now
 
-Modern publishing pipelines are diverse and fragmented:
+Modern workflows — across software, data, research, infrastructure, and automation — are built from heterogeneous, independently evolving components:
 
-* Typographic engines (*TeX*, *typst*, *weasyprint*, *princeXML*, etc.)
-* Document converters (*Pandoc*, *markdown tooling*, *DocBook*, etc.)
-* PDF processors
-* Validators (PDF/A, metadata, accessibility)
-* Font sets
-* Metadata injectors
-* Layout preprocessors
-* Multiple OS environments
-* Multiple container engines
+* containerized tools and CLIs
+* domain-specific engines (compilers, renderers, transformers)
+* data processors and validators
+* environment managers and package ecosystems
+* runtime platforms (CI systems, orchestrators, schedulers)
+* OS and container environments
+* internal scripts and glue code
 
-Different teams adopt different tools; tools evolve independently; defaults drift over time.
+Teams combine these pieces in different ways. Defaults drift. Tools silently upgrade. Environment assumptions accumulate. And because each component changes at its own pace, the *workflow* itself becomes unstable.
 
-The result:
-**identical sources often fail to produce identical outputs.**
+The result is the same everywhere:
 
-Knuth created TeX so that *the same input produces the same output humanly*.
-OriGen generalizes this principle to **entire pipelines**, regardless of what toolchain users choose.
+**identical inputs frequently fail to produce identical outcomes.**
 
-OriGen is explicitly **not tied to LaTeX or any single technology**.
-It aims to provide deterministic publishing using:
+What Knuth solved for typesetting — *the same input produces the same output* — generalizes to far more than documents. In any domain, stability requires an architecture where intent is explicit, toolchains are frozen, and the plan cannot mutate downstream.
 
-* LaTeX **or** typst **or** other engines
-* markdown-based flows
-* pure-PDF workflows
-* HTML-to-print pipelines
-* anything users declare via Maps + Navigators
+OriGen extends that principle from a single tool to **entire multi-step pipelines**, no matter what they contain.
 
-OriGen is about **workflow determinism**, not toolchain preference.
+OriGen is explicitly not tied to containers, CI systems, or cloud platforms.
+It applies equally well to workflows that run in VMs, on bare metal, inside embedded devices, across HPC clusters, or within domain-specific appliances. Whether a toolchain lives in a container, a runtime VM, an FPGA build environment, a LaTeX engine, a compiler suite, or an ML training stack, OriGen can model it deterministically — as long as its behavior can be declared through Maps, Navigators, and Backpacks.
+
+It can describe deterministic workflows built from:
+
+* containerized tools **and** VM-hosted tools
+* embedded, on-device, or appliance-bound execution environments
+* data and ML pipelines
+* infrastructure and platform automation
+* DevOps build/scan/publish chains
+* document, publishing, and rendering engines
+* scientific and research reproducibility environments
+* firmware, simulation, and hardware-adjacent toolchains
+* any collection of tools declared via **Maps + Navigators + Backpacks**
+
+OriGen is about **workflow determinism**, not tool or platform choice.
+It provides a stable planning layer regardless of the technologies involved.
 
 ---
 

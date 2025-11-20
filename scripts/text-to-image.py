@@ -25,7 +25,7 @@ FONT_CANDIDATES = [
 ]
 
 
-def load_font(size=22):
+def load_font(size=12):
     for path in FONT_CANDIDATES:
         try:
             return ImageFont.truetype(path, size=size)
@@ -41,7 +41,7 @@ def load_font(size=22):
     )
 
 
-FONT = load_font(size=14)
+FONT = load_font()
 PADDING = 30
 
 
