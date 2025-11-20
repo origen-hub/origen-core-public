@@ -1,7 +1,8 @@
 # 📘 The Origin of Origen
 
 > At its inception, OriGen’s mission was to stabilize publishing workflows.
-> Since then, OriGen has evolved into a cross-domain deterministic workflow compiler.
+> Since then, OriGen has evolved into a cross-domain deterministic workflow compiler,
+> as its core abstractions proved naturally applicable far beyond publishing.
 > The text below is preserved in its original form for historical reasons.
 
 ## What's in the name?

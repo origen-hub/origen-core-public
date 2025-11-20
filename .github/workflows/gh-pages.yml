@@ -30,7 +30,6 @@ jobs:
 
       - name: Include files outside of docs_dir
         run: |
-          mv docs/public/overview/origen-primer.md docs/public/index.md
           cp CODE_OF_CONDUCT.md CONTRIBUTING.md SECURITY.md docs/public/pages
           cp LICENSE docs/public/pages/LICENSE.md
           cp NOTICE docs/public/pages/NOTICE.md

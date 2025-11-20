@@ -28,13 +28,11 @@ markdown_extensions:
   - md_in_html
 
 nav:
-  - Primer: index.md
+  - Home: index.md
+  - Primer: overview/origen-primer.md
   - Value Statement: overview/value.md
-  - MVP Details: roadmap/00-mvp.md
+  - Top-Level Overview: architecture/00-top-level.md
   - About: pages/about.md
-
-  - Architecture:
-      - Top-Level Overview: architecture/00-top-level.md
 
   - Community:
       - Code of Conduct: pages/CODE_OF_CONDUCT.md

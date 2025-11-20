@@ -16,21 +16,21 @@ It produces **portable, reproducible, reviewable plans** that your existing tool
 ## One-Minute Mental Model
 
 ```
-Maps + Navigators + Sidecars
-           │
-           ▼
-        Compass
-      (planning only)
-           │
-           ▼
-            IR
-   (portable workflow plan)
-           │
-           ▼
-Backend Adapter (Kubernetes, Podman, etc.)
-           │
-           ▼
- Native Artifacts (manifests, scripts)
+     Maps + Navigators + Backpacks
+                  │
+                  ▼
+                Compass
+              (planning only)
+                  │
+                  ▼
+                Route
+          (portable workflow plan)
+                  │
+                  ▼
+  Guide (adapters for: Kubernetes, Podman, etc.)
+                  │
+                  ▼
+     Native Artifacts (manifests, scripts)
 ```
 
 OriGen stops here.
@@ -83,7 +83,7 @@ OriGen provides a **single declarative description of workflow intent**, indepen
 | ------------- | -------------------------------------------------------------------------- |
 | **Map**       | Declarative YAML describing workflow steps, inputs, outputs, dependencies. |
 | **Navigator** | A pinned tool definition (container image + argument template, by digest). |
-| **Sidecar**   | Immutable resource bundle (fonts, configs, templates, data, etc.).         |
+| **Backpack**  | Immutable resource bundle (fonts, configs, templates, data, etc.).         |
 
 Together, they encode the entire workflow in a stable, versionable form.
 
@@ -201,7 +201,9 @@ Workflows live directly in the repo:
 repo/
   maps/
   navigators/
-  sidecars/
+  backpacks/
+  routes/
+  guides/
 ```
 
 Developers:
@@ -217,7 +219,7 @@ OriGen feels like part of standard development, not a new platform.
 
 ## Backend Extensibility (Open by Design)
 
-Backend adapters translate **IR → native artifacts**.
+Guides translate **Route → native artifacts**.
 
 They are intentionally simple to implement:
 
@@ -237,9 +239,7 @@ Enterprises can host everything privately:
 
 * Maps
 * Navigators
-* Sidecars
-* tool images
-* resource bundles
+* Backpacks
 
 There is:
 
