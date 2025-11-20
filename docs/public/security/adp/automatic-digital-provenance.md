@@ -61,11 +61,6 @@ ADP describes a simple chain:
 
 ![The ADP Model](../../images/adp-graph.png "The ADP Model")
 
-
-Graph View (Alternate Representation):
-
-![Alternate Representation](../../images/adp-graph.png "The ADP Model")
-
 Each link is:
 
 * immutable,
@@ -131,22 +126,34 @@ These capabilities set the stage for downsweep.
 
 Downsweep is the operational capability unlocked by ADP.
 
-A downsweep begins with a single outdated or vulnerable digest and follows its usage *downstream* across the entire organization.
+A downsweep is triggered when a vulnerable or outdated digest is identified.
+From there, the process is:
 
-Because:
+1. **Identify the vulnerable digest (D1).**
+   This may come from a CVE scanner, policy engine, or periodic audit.
 
-* every digest maps to a commit,
-* every commit maps to a manifest,
-* every manifest is referenced by Maps,
+2. **Locate the manifest commit (C2) that published D1.**
+   This is the commit that contains the manifest referencing the digest,
+   produced by the automated build pipeline.
 
-…a scanner can:
+3. **Search all Maps for references to C2.**
+   Each Map that references C2 is a consumer of the vulnerable toolchain or resource.
 
-1. Identify a vulnerable digest.
-2. Find the commit that introduced it.
-3. Search all Maps for references to that commit.
-4. Enumerate every affected workflow.
-5. Generate automated PRs to update each Map to a safe commit.
-6. Produce impact reports for compliance and security teams.
+4. **Enumerate every affected workflow.**
+   Each Map → Route → backend execution path represents a workflow that needs updating.
+
+5. **Generate automated PRs to update each Map to a safe commit.**
+   The system proposes a new commit reference (C2′ or C3) containing patched digest(s).
+
+6. **Produce organization-wide impact and remediation reports.**
+   Security, platform, and compliance teams receive complete visibility into:
+
+   * which workflows are affected
+   * which repos are impacted
+   * which PRs were generated
+   * what was remediated and what is still pending
+
+> **Downsweep operationalizes ADP by turning provenance information into automated, organization-wide updates.**
 
 ![Downsweep in action](../../images/adp-downsweep.png "Downsweep in action")
 
