@@ -15,23 +15,7 @@ It produces **portable, reproducible, reviewable plans** that your existing tool
 
 ## One-Minute Mental Model
 
-```
-     Maps + Navigators + Backpacks
-                  │
-                  ▼
-                Compass
-              (planning only)
-                  │
-                  ▼
-                Route
-          (portable workflow plan)
-                  │
-                  ▼
-  Guide (adapters for: Kubernetes, Podman, etc.)
-                  │
-                  ▼
-     Native Artifacts (manifests, scripts)
-```
+![One-Minute Mental Model](../images/origen-flow.png "One-Minute Mental Model")
 
 OriGen stops here.
 Your existing systems handle execution.

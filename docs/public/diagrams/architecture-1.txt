@@ -1,0 +1,16 @@
+         Compass
+(Maps + Navigators → Route)
+             │
+             ▼
+         Route (IR)
+             │
+             ▼
+ ┌────────────────────────────────────────────────────────────┐
+ │                  Guides(Backend Adapters)                  │
+ │    (Each driver consumes IR and performs real execution)   │
+ └───────┬──────────┬──────────────┬────────┬────────────┬────┘
+         │          │              │        │            │
+         ▼          ▼              ▼        ▼            ▼
+  Local Container   Local VM     CI/CD    Serverless   Enterprise
+      Driver        Driver      Driver      Driver       Driver
+(development mode) (one-click)

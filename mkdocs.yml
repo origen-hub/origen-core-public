@@ -11,6 +11,7 @@ plugins:
 
 theme:
   name: material
+  custom_dir: docs/mkdocs
   features:
     - navigation.instant
     - navigation.top
@@ -29,15 +30,12 @@ markdown_extensions:
 
 nav:
   - Home: index.md
+  - Vocabulary: pages/vocabulary.md
   - Primer: overview/origen-primer.md
-  - Value Statement: overview/value.md
-  - Top-Level Overview: architecture/00-top-level.md
+  - Value Statement: overview/value-statement.md
+  - Zero-Trust-by-Design: security/zero-trust-by-design.md
+  - ADP: security/adp/automatic-digital-provenance.md
+  - Architecture: architecture/00-top-level.md
   - About: pages/about.md
-
-  - Community:
-      - Code of Conduct: pages/CODE_OF_CONDUCT.md
-      - Contributing: pages/CONTRIBUTING.md
-      - Security Policy: pages/SECURITY.md
-      - License: pages/LICENSE.md
-      - Notice: pages/NOTICE.md
-      - Copyright: pages/COPYRIGHT.md
+  - Glossary: pages/glossary.md
+  - FAQ: pages/faq.md

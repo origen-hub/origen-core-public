@@ -1,0 +1,480 @@
+# 🧠 **OriGen FAQ — Comprehensive Architectural Reference**
+
+*A single page answering every question reviewers will ask in the first 30 minutes.*
+
+---
+
+## ❓ Why is this FAQ so long?
+
+Because this page is temporarily doing the job of several pages.
+
+Until OriGen’s architecture fully stabilizes, the FAQ is:
+
+* a quick answer hub
+* a design notebook
+* a place to park edge questions
+* a running commentary on what’s evolving
+
+We prefer **upfront clarity** over rewriting docs every week.
+As OriGen matures, this FAQ will shrink — not grow.
+
+## 🧭 What is OriGen, in one sentence?
+
+OriGen is a **workflow compiler**:
+it transforms declarative Maps into deterministic Routes, which Guides translate into backend-native execution.
+
+OriGen does **not** run workflows.
+
+---
+
+## 🧱 Is OriGen an orchestrator?
+
+**No.**
+OriGen does not run, schedule, retry, or orchestrate anything.
+
+Execution is handled entirely by:
+
+* GitHub Actions
+* GitLab CI
+* Argo / Kubernetes
+* Containers / VMs
+* Bare-metal scripts
+
+OriGen only produces configuration for these systems.
+
+---
+
+## 📘 What does a Map define?
+
+A Map defines **intent**:
+
+* steps
+* dependencies (DAG)
+* toolchains (Navigators)
+* resources (Backpacks / Cargo)
+* parameterization
+* artifact flow structure
+
+Maps contain **no** runtime behavior and depend on **zero** environment state.
+
+---
+
+## 🚧 What is a Navigator?
+
+A Navigator defines a **frozen toolchain**:
+
+* pinned container image digest
+* entrypoints
+* available modes
+* deterministic configuration
+
+Navigators participate in ADP and Downsweep because they define immutable inputs.
+
+---
+
+## 🚚 What is Cargo?
+
+Cargo is the **unified abstraction for all mounted resources** in a workflow.
+
+Cargo can originate from:
+
+* a Backpack (immutable input)
+* a Navigator-provided static resource
+* a runtime artifact produced by an earlier step
+
+Cargo defines **flow**, not data.
+
+---
+
+## 🎒 What is a Backpack?
+
+**Backpack = Cargo with enforced immutability.**
+
+Backpacks represent **immutable, digest-pinned inputs** made available to steps.
+
+Compass enforces:
+
+* Backpacks are **always read-only**
+* Backpacks must reference manifests
+* Users cannot override mount modes
+* Backpacks can never contain runtime outputs
+
+Backpacks are part of planning-time provenance (ADP).
+
+---
+
+## 🧩 How do Backpacks and Cargo differ?
+
+Backpack **is** Cargo — with extra rules:
+
+| Property                | Backpack      | Runtime Cargo             |
+| ----------------------- | ------------- | ------------------------- |
+| Origin                  | manifest      | workflow execution        |
+| Immutable?              | **Yes**       | mutable by producer only  |
+| Mode                    | **forced RO** | producer RW, consumers RO |
+| Known at planning time? | Yes           | No                        |
+| Digest-pinned?          | **Yes**       | No                        |
+| ADP participant?        | **Yes**       | No                        |
+
+---
+
+## 🔒 Can users override Backpack mount modes?
+
+**No.**
+Compass enforces Backpack immutability:
+
+* Any `rw` request is rejected
+* Any attempted override is normalized back to `ro`
+* Backpacks never accept updates or mutations
+
+This preserves determinism, reproducibility, and ADP correctness.
+
+---
+
+## 🧭 Who controls Navigators and Backpacks?
+
+You do. There is **no central registry** and no authority structure.
+
+Navigators and Backpacks are intentionally:
+
+* just a manifest
+* plus an optional Containerfile (with pinned digest)
+* stored in any Git server you choose
+
+Enterprise Git, GitHub, GitLab, air-gapped repos — all valid.
+
+OriGen is federated by design.
+You can publish your own definitions without permission from anyone.
+
+---
+
+## 🔄 What is a Route?
+
+A Route is OriGen’s **intermediate representation (IR)**:
+
+* deterministic
+* fully expanded
+* backend-neutral
+* explicit DAG
+* immutable
+
+Guides consume Routes and produce backend-native execution configs.
+
+---
+
+## 🧭 Are Routes DAGs or lists?
+
+Routes are **DAGs**.
+
+They support:
+
+* sequential steps
+* parallelism
+* fan-in/fan-out
+* conditional dependencies
+
+The structure is abstract; backends interpret it in their own execution model.
+
+---
+
+## 🧪 What does a Guide do?
+
+Guides **translate** Routes into backend-native configs.
+
+Guides must **not**:
+
+* add steps
+* modify behavior
+* retry
+* discover environment details
+* reinterpret Maps or Routes
+* inject implicit logic
+
+Guides are translators, not planners.
+
+---
+
+## ❓ Why invent a whole new language? I already have too many DSLs in my head.
+
+We didn’t pull this vocabulary out of thin air.
+
+OriGen’s terms (Map, Navigator, Backpack, Compass, Route, Guide, Cargo) aren’t branding —
+they each correspond to a **precise architectural boundary** in the system.
+
+The metaphor serves three purposes:
+
+1. **It creates mental separation between layers**
+   — preventing conceptual contamination
+   — helping you reason about workflow purity
+   — keeping intent, tooling, resources, and execution distinct
+
+2. **It avoids domain-specific jargon**
+   Workflow terms in DevOps don’t map well to ML pipelines.
+   ML terms don’t map well to document export chains.
+   Infra terms don’t map well to scientific workflows.
+   The navigation metaphor cuts across *all* domains cleanly.
+
+3. **Once you learn to see workflows through OriGen’s lens, you become a workflow generalist**
+   You stop thinking in terms of GitHub Actions vs GitLab vs Kubernetes vs Jenkins vs Argo.
+   You start thinking in Maps, Routes, and Guides —
+   one conceptual model that adapts to any backend.
+
+The vocabulary isn’t ornamental.
+It reflects the architecture —
+and once internalized, it’s the fastest way to reason about complex workflows.
+
+---
+
+## 🔐 How does OriGen handle secrets?
+
+It doesn’t.
+
+Maps may reference **secret names**, but:
+
+* OriGen never reads secret values
+* OriGen never fetches or decrypts secrets
+* Backends inject secrets at execution time
+
+This preserves zero-trust boundaries.
+
+---
+
+## 🔄 How does OriGen handle state?
+
+OriGen distinguishes **structural state** from **runtime state**:
+
+### 1. Structural state (planning-level)
+
+Maps define **Cargo flows**:
+
+* which step produces which artifact
+* which steps consume those artifacts
+* Backpack mounts
+* dependency graph edges
+* resource paths and names
+
+OriGen validates and compiles this into a deterministic Route.
+
+**OriGen cares about the *shape* of artifact flow, not the data.**
+
+### 2. Runtime state (execution-level)
+
+Actual artifacts produced by execution — files, logs, binaries, models, PDFs — are handled entirely by the backend.
+
+OriGen does **not**:
+
+* store
+* hash
+* track
+* manage
+* inspect
+* retain
+
+**any runtime data.**
+
+Backends own:
+
+* artifact stores
+* workspaces
+* caches
+* retention policies
+* access control
+
+> **Users plan Cargo flows in maps; backends handle Cargo contents.**
+
+---
+
+## 🧬 Does OriGen guarantee deterministic results?
+
+OriGen guarantees **deterministic planning**, not deterministic execution.
+
+Execution depends on:
+
+* tool behavior
+* randomness
+* time-based functions
+* external APIs
+* backend-specific quirks
+
+OriGen is not a build system and does not enforce reproducible computation.
+
+---
+
+## 🧱 What are OriGen’s main limitations?
+
+OriGen does **not**:
+
+* run workflows
+* orchestrate tasks
+* manage secrets
+* manage state
+* hash outputs
+* track runtime artifacts
+* guarantee deterministic outputs
+* replace CI systems
+* replace Kubernetes
+
+It sits *above* execution systems.
+
+---
+
+## 🔐 Why does OriGen make zero-trust cheap?
+
+Zero-trust emerges from:
+
+* immutable toolchains
+* digest-pinned Backpacks
+* explicit Cargo flows
+* pure, environment-free planning
+* no hidden dependencies
+* no global state
+* no runtime inference
+* enforced boundaries
+
+OriGen removes the conditions that require validation in the first place.
+
+---
+
+## 🧾 What is Automatic Digital Provenance (ADP)?
+
+ADP emerges naturally:
+
+1. Navigators/Backpacks produce digests
+2. Builds commit manifests
+3. Maps reference manifest commits
+4. Routes embed exact input identities
+
+This creates:
+
+* full dependency lineage
+* reconstruction of any workflow
+* complete toolchain traceability
+* audit-ready compliance
+
+ADP requires no additional system.
+OriGen’s architecture already guarantees it.
+
+---
+
+## 🍂 What is Downsweep?
+
+Downsweep is the reverse of ADP:
+
+1. Identify vulnerable digest
+2. Find the manifest commit that introduced it
+3. Discover all Maps referencing that commit
+4. Enumerate affected workflows
+5. Generate PRs to update Maps
+6. Produce impact reports
+
+Downsweep makes org-wide remediation automatic.
+
+---
+
+## 🧨 What breaks ADP?
+
+Only user violations:
+
+* not committing manifests
+* referencing digests manually
+* mixing Backpack and Cargo types
+* embedding tags instead of digests
+* using Backpacks as mutable state
+* skipping Navigator/Backpack abstraction
+
+ADP itself is robust — misuse breaks provenance.
+
+---
+
+## 🧨 What breaks Downsweep?
+
+Downsweep requires:
+
+* manifests to exist
+* Maps to reference commits
+* Navigators/Backpacks to pin digests
+
+If teams inline digests or skip manifest commits, coverage shrinks.
+
+---
+
+## 🧭 How do I actually use OriGen?
+
+You usually:
+
+1. Write a Map
+2. Reference Navigators and Backpacks
+3. Run Compass → generate Route
+4. Feed Route into a Guide
+5. Run the resulting config in your backend
+
+Most daily work happens in Maps.
+
+---
+
+# ⏳ You convinced me. When?
+
+OriGen’s motto is:
+
+> **Upfront clarity → downstream simplicity.**
+
+The clarity is nearly complete.
+The implementation is still being built carefully — semantics first, code second.
+
+Before opening the repo, we want:
+
+* the IR locked
+* the boundaries correct
+* the architecture stable
+* the early missteps removed
+
+OriGen is real.
+We are simply not rushing the foundation.
+
+---
+
+## 👑 If OriGen is a one-person project, why does the documentation say “we”?
+
+No royal “we” here.
+
+“We” refers to the community that will form around the project.
+OriGen is designed to grow outward — Navigators, Backpacks, Guides, reviews, ideas.
+
+“We” includes:
+
+* everyone who will contribute
+* everyone who will extend the ecosystem
+* everyone who joins once the repo goes public
+
+In other words:
+
+> **“We” anticipates *you*.**
+
+---
+
+## 📘 What should I read first?
+
+1. Primer
+2. Top-Level Architecture
+3. Zero-Trust-by-Design
+4. Automatic Digital Provenance (ADP)
+5. This FAQ
+
+---
+
+## 🎯 Summary
+
+OriGen’s model is:
+
+* **Maps**: intent
+* **Navigators/Backpacks**: immutable inputs
+* **Cargo**: unified mount abstraction
+* **Compass**: pure planning
+* **Route**: deterministic IR
+* **Guides**: backend translators
+* **Backpack = cargo with forced immutability**
+* **Zero-trust emerges naturally**
+* **ADP emerges structurally**
+* **Downsweep scales remediation across orgs**
+
+Everything fits together cleanly.

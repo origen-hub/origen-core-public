@@ -26,14 +26,10 @@ jobs:
 
       - name: Install MkDocs + Material theme
         run: |
-          pip install mkdocs-material mkdocs-autorefs
+          pip install pillow mkdocs-material mkdocs-autorefs
 
-      - name: Include files outside of docs_dir
-        run: |
-          cp CODE_OF_CONDUCT.md CONTRIBUTING.md SECURITY.md docs/public/pages
-          cp LICENSE docs/public/pages/LICENSE.md
-          cp NOTICE docs/public/pages/NOTICE.md
-          cp COPYRIGHT docs/public/pages/COPYRIGHT.md
+      - name: Render diagrams
+        run: ./scripts/text-to-image.py
 
       - name: Build site
         run: mkdocs build --clean
