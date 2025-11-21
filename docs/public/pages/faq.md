@@ -194,6 +194,37 @@ Guides are translators, not planners.
 
 ---
 
+## ❓ Why invent a whole new language? I already have too many DSLs in my head.
+
+We didn’t pull this vocabulary out of thin air.
+
+OriGen’s terms (Map, Navigator, Backpack, Compass, Route, Guide, Cargo) aren’t branding —
+they each correspond to a **precise architectural boundary** in the system.
+
+The metaphor serves three purposes:
+
+1. **It creates mental separation between layers**
+   — preventing conceptual contamination
+   — helping you reason about workflow purity
+   — keeping intent, tooling, resources, and execution distinct
+
+2. **It avoids domain-specific jargon**
+   Workflow terms in DevOps don’t map well to ML pipelines.
+   ML terms don’t map well to document export chains.
+   Infra terms don’t map well to scientific workflows.
+   The navigation metaphor cuts across *all* domains cleanly.
+
+3. **Once you learn to see workflows through OriGen’s lens, you become a workflow generalist**
+   You stop thinking in terms of GitHub Actions vs GitLab vs Kubernetes vs Jenkins vs Argo.
+   You start thinking in Maps, Routes, and Guides —
+   one conceptual model that adapts to any backend.
+
+The vocabulary isn’t ornamental.
+It reflects the architecture —
+and once internalized, it’s the fastest way to reason about complex workflows.
+
+---
+
 ## 🔐 How does OriGen handle secrets?
 
 It doesn’t.
