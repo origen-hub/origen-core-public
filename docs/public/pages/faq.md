@@ -118,6 +118,19 @@ Backpack **is** Cargo — with extra rules:
 
 ---
 
+## 🔒 Can users override Backpack mount modes?
+
+**No.**
+Compass enforces Backpack immutability:
+
+* Any `rw` request is rejected
+* Any attempted override is normalized back to `ro`
+* Backpacks never accept updates or mutations
+
+This preserves determinism, reproducibility, and ADP correctness.
+
+---
+
 ## 🧭 **Who controls Navigators and Backpacks?**
 
 You do. There is **no central registry** and no authority structure.
@@ -132,19 +145,6 @@ Enterprise Git, GitHub, GitLab, air-gapped repos — all valid.
 
 OriGen is federated by design.
 You can publish your own definitions without permission from anyone.
-
----
-
-## 🔒 Can users override Backpack mount modes?
-
-**No.**
-Compass enforces Backpack immutability:
-
-* Any `rw` request is rejected
-* Any attempted override is normalized back to `ro`
-* Backpacks never accept updates or mutations
-
-This preserves determinism, reproducibility, and ADP correctness.
 
 ---
 
