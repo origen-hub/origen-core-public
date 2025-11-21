@@ -4,6 +4,20 @@
 
 ---
 
+## ❓ Why is this FAQ so long?
+
+Because this page is temporarily doing the job of several pages.
+
+Until OriGen’s architecture fully stabilizes, the FAQ is:
+
+* a quick answer hub
+* a design notebook
+* a place to park edge questions
+* a running commentary on what’s evolving
+
+We prefer **upfront clarity** over rewriting docs every week.
+As OriGen matures, this FAQ will shrink — not grow.
+
 ## 🧭 What is OriGen, in one sentence?
 
 OriGen is a **workflow compiler**:
@@ -101,6 +115,23 @@ Backpack **is** Cargo — with extra rules:
 | Known at planning time? | Yes           | No                        |
 | Digest-pinned?          | **Yes**       | No                        |
 | ADP participant?        | **Yes**       | No                        |
+
+---
+
+# 🧭 **Who controls Navigators and Backpacks?**
+
+You do. There is **no central registry** and no authority structure.
+
+Navigators and Backpacks are intentionally:
+
+* just a manifest
+* plus an optional Containerfile (with pinned digest)
+* stored in any Git server you choose
+
+Enterprise Git, GitHub, GitLab, air-gapped repos — all valid.
+
+OriGen is federated by design.
+You can publish your own definitions without permission from anyone.
 
 ---
 
@@ -347,6 +378,46 @@ You usually:
 5. Run the resulting config in your backend
 
 Most daily work happens in Maps.
+
+---
+
+# ⏳ **You convinced me. When?**
+
+OriGen’s motto is:
+
+> **Upfront clarity → downstream simplicity.**
+
+The clarity is nearly complete.
+The implementation is still being built carefully — semantics first, code second.
+
+Before opening the repo, we want:
+
+* the IR locked
+* the boundaries correct
+* the architecture stable
+* the early missteps removed
+
+OriGen is real.
+We are simply not rushing the foundation.
+
+---
+
+## 👑 **If OriGen is a one-person project, why does the documentation say “we”?**
+
+No royal “we” here.
+
+“We” refers to the community that will form around the project.
+OriGen is designed to grow outward — Navigators, Backpacks, Guides, reviews, ideas.
+
+“We” includes:
+
+* everyone who will contribute
+* everyone who will extend the ecosystem
+* everyone who joins once the repo goes public
+
+In other words:
+
+> **“We” anticipates *you*.**
 
 ---
 
