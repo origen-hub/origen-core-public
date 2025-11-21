@@ -1,0 +1,15 @@
+     Maps + Navigators + Backpacks
+                  │
+                  ▼
+                Compass
+              (planning only)
+                  │
+                  ▼
+                Route
+          (portable workflow plan)
+                  │
+                  ▼
+  Guide (adapters for: Kubernetes, Podman, etc.)
+                  │
+                  ▼
+     Native Artifacts (manifests, scripts)
