@@ -92,7 +92,7 @@ Templates lack semantics for steps, dependencies, or intent.
 They execute DAGs, assuming the DAG already exists.
 Their DSLs embed execution rules and environment assumptions.
 
-**OriGen generates the workflow graph (IR) itself, independent of runtime.
+**OriGen generates the workflow graph (IR) itself, independent of runtime.**
 
 ---
 

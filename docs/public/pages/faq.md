@@ -131,7 +131,7 @@ This preserves determinism, reproducibility, and ADP correctness.
 
 ---
 
-## 🧭 **Who controls Navigators and Backpacks?**
+## 🧭 Who controls Navigators and Backpacks?
 
 You do. There is **no central registry** and no authority structure.
 
@@ -208,11 +208,11 @@ This preserves zero-trust boundaries.
 
 ---
 
-## 🔄 **How does OriGen handle state? **
+## 🔄 How does OriGen handle state?
 
 OriGen distinguishes **structural state** from **runtime state**:
 
-### **1. Structural state (planning-level)**
+### 1. Structural state (planning-level)
 
 Maps define **Cargo flows**:
 
@@ -226,7 +226,7 @@ OriGen validates and compiles this into a deterministic Route.
 
 **OriGen cares about the *shape* of artifact flow, not the data.**
 
-### **2. Runtime state (execution-level)**
+### 2. Runtime state (execution-level)
 
 Actual artifacts produced by execution — files, logs, binaries, models, PDFs — are handled entirely by the backend.
 
@@ -381,7 +381,7 @@ Most daily work happens in Maps.
 
 ---
 
-# ⏳ **You convinced me. When?**
+# ⏳ You convinced me. When?
 
 OriGen’s motto is:
 
@@ -402,7 +402,7 @@ We are simply not rushing the foundation.
 
 ---
 
-## 👑 **If OriGen is a one-person project, why does the documentation say “we”?**
+## 👑 If OriGen is a one-person project, why does the documentation say “we”?
 
 No royal “we” here.
 
