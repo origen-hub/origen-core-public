@@ -18,7 +18,7 @@ This is the root of the architecture series and should remain mostly stable afte
 
 ## 1. What OriGen Is
 
-OriGen is a **deterministic publishing compiler**.
+OriGen is a **deterministic workflow compiler**.
 
 OriGen does not execute tools directly. It:
 
@@ -178,24 +178,7 @@ No backend derives from any other.
 > **About the Route.**
 > The Route is a structured, machine-readable execution plan describing steps, dependencies, required tools, and deterministic parameters. It is versioned, schema-validated, and serializable. The IR does not encode execution strategy — only intent and structure — ensuring stability across platforms and backends.
 
-```
-         Compass
-(Maps + Navigators → Route)
-             │
-             ▼
-         Route (IR)
-             │
-             ▼
- ┌────────────────────────────────────────────────────────────┐
- │                  Guides(Backend Adapters)                  │
- │    (Each driver consumes IR and performs real execution)   │
- └───────┬──────────┬──────────────┬────────┬────────────┬────┘
-         │          │              │        │            │
-         ▼          ▼              ▼        ▼            ▼
-  Local Container   Local VM     CI/CD    Serverless   Enterprise
-      Driver        Driver      Driver      Driver       Driver
-(development mode) (one-click)
-```
+![](../images/architecture-1.png)
 
 ### Key points
 
