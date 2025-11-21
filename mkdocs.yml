@@ -17,9 +17,6 @@ theme:
     - navigation.top
     - content.code.copy
 
-extra_javascript:
-  - js/gc.js
-
 # Optional (makes the docs nicer)
 markdown_extensions:
   - admonition

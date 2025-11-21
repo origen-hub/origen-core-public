@@ -118,7 +118,7 @@ Backpack **is** Cargo — with extra rules:
 
 ---
 
-# 🧭 **Who controls Navigators and Backpacks?**
+## 🧭 **Who controls Navigators and Backpacks?**
 
 You do. There is **no central registry** and no authority structure.
 
