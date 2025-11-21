@@ -1,120 +1,100 @@
-# **README.md**
-
 <p align="center">
   <img src="docs/public/images/origen-logo.jpg" width="120" alt="OriGen Logo">
 </p>
 
-<h1 align="center">OriGen</h1>
-<p align="center"><strong>Deterministic Workflow Plans • Zero-Trust by Design • Automatic Digital Provenance</strong></p>
+# 📘 OriGen — A Deterministic Workflow Compiler
+
+*(Maps → Route → Backend-native artifacts)*
+
+> **OriGen treats workflows the way compilers treat code:**
+> declarative input → deterministic IR → translation-only backends.
+
+
+OriGen does **not** run workflows.
+It compiles declarative **Maps** into a backend-neutral **Route** (IR), and **Guides** translate that IR into native execution artifacts for:
+
+* Kubernetes
+* CI/CD systems
+* container engines
+* VM/embedded runtimes
+* or any custom backend
+
+Execution happens entirely outside OriGen.
+
+OriGen provides the **planning layer** modern automation has been missing.
 
 ---
 
-## What Is OriGen?
+## 🌎 What OriGen Is (in one sentence)
 
-OriGen is a lightweight, deterministic workflow planner.
-
-It separates intent from execution:
-
-```
-
-Map → Compass → Route → Guide → (your backend)
-
-````
-
-OriGen never runs workflows.
-It **compiles** them.
-
-Maps declare intent.
-Navigators and Backpacks freeze tools and resources by digest.
-The Compass plans deterministically.
-Guides translate the plan into backend-native execution artifacts.
-
-The result is a workflow model that is:
-
-- explicit
-- reproducible
-- backend-agnostic
-- structurally zero-trust
-- inherently provenance-rich
-
-OriGen is not an orchestrator.
-It is not a runner.
-It is not CI/CD.
-
-OriGen is the **missing compiler** between declarative workflow intent and real execution.
+OriGen is a deterministic workflow compiler that transforms declarative Maps into backend-agnostic, reproducible execution plans.
 
 ---
 
-## Core Concepts
+## 🧭 Core Concepts
 
-**Map**
-Declarative workflow intent (your source of truth).
 
-**Navigator**
-Digest-pinned toolchain or executor definition.
-Examples: compilers, PDF engines, linters, transformers.
+- **Map** — Declarative workflow intent: steps, tools, modes, I/O, dependencies.
+- **Navigator** — Digest-pinned toolchain definition: image, entrypoints, modes.
+- **Backpack** — Immutable resource bundle (fonts, configs, datasets, templates).
+- **Route (IR)** — Deterministic, backend-neutral execution graph.
+- **Guide** — Translator: Route → native backend artifacts (K8s, CI, VM, scripts).
+- **Step** — Unit of execution.
+- **Cargo** — Outputs produced by Steps.
+- **Execution Boundary** — Where OriGen stops and external systems take over.
 
-**Backpack**
-Immutable resource bundle (fonts, templates, configs, datasets).
+This vocabulary prevents domain contamination and creates a stable grammar for workflows across DevOps, data, publishing, ML, scientific work, and more.
 
-**Compass**
-Pure planner: converts Map + Navigators + Backpacks → Route.
-
-**Route**
-An explicit, immutable, backend-neutral plan.
-
-**Guide**
-Backend adapter: translates Route into GitHub Actions, GitLab CI, Kubernetes jobs, Argo workflows, or local scripts.
-
-OriGen produces plans.
-Other systems execute them.
 
 ---
 
-## Minimal Mental Model
+## 🧱 The OriGen Architecture (Top-Level Overview)
+
+OriGen performs **planning**, not execution:
+
+1. Loads Maps
+2. Loads Navigators
+3. Resolves Backpacks
+4. Validates workflow structure
+5. Produces a deterministic Route
+6. A Guide translates the Route into backend-native artifacts
+
+Execution is delegated to:
+
+* Kubernetes
+* CI/CD
+* local container engines
+* enterprise backends
+* embedded or VM environments
+
+OriGen stays **platform-agnostic** and **toolchain-neutral**.
+
+---
+
+## 🧭 Minimal Mental Model
+
+Workflow intent → deterministic IR → backend outputs.
 
 ![](https://origen-hub.github.io/origen-core-public/images/origen-flow.png)
 
----
-
-## Why OriGen Exists
-
-Modern DevOps has grown brittle, implicit, and opaque:
-
-* tools mutate silently
-* CI contexts drift
-* environments leak state
-* security becomes reactive
-* provenance is bolted on after the fact
-
-OriGen’s architecture flips the model:
-
-* **everything is explicit**
-* **everything is digest-pinned**
-* **planning is pure and deterministic**
-* **execution is isolated and external**
-
-This makes zero-trust not a policy, but a structural side-effect.
+OriGen stops before execution.
+Everything that runs, runs elsewhere.
 
 ---
 
-## Zero-Trust by Design
+## 🔐 Zero-Trust by Design
 
-OriGen removes the trust surfaces that zero-trust frameworks usually defend.
+Zero-trust doesn’t require enforcement here — it emerges from structure:
 
-- No mutable toolchains.
-- No inherited environments.
-- No runtime discovery.
-- No global state.
-- No cross-step mutation.
-- No hidden behavior.
+* explicit, pinned toolchains
+* immutable inputs
+* pure, environment-free planning
+* backend-neutral IR
+* strict execution boundary
 
-Zero-trust stops being expensive.
+Nothing is implicit enough to require verification.
 
-It becomes cheap.
-
-> Curious how?
-> Read **[Zero-Trust by Design](https://origen-hub.github.io/origen-core-public/security/zero-trust-by-design/)**.
+OriGen removes the conditions that normally make zero-trust expensive.
 
 ---
 
@@ -133,90 +113,115 @@ This leads directly to:
 
 ---
 
-## Automatic Digital Provenance (ADP)
+## 🧬 Automatic Digital Provenance (ADP)
 
-ADP is the structural consequence of OriGen’s immutability and determinism.
+ADP emerges from:
 
-Every digest maps to:
+* digest-pinned Navigators & Backpacks
+* manifest commits
+* deterministic planning
+* immutable IR
 
-* the commit that built it
-* the manifest that published it
-* the Maps that consume it
-* the Routes they produce
+Provenance becomes:
 
-With this graph, organizations gain **instant, reconstructable lineage**.
+* complete
+* reconstructable
+* audit-ready
+* derived mechanically from Git
 
-> Learn more: **[Automatic Digital Provenance](https://origen-hub.github.io/origen-core-public/security/adp/automatic-digital-provenance/)**
+No scanners or instrumentation required.
 
 ---
 
-## Downsweep: Organization-Wide Reverse Dependency Discovery
+## 🌪️ Downsweep (Org-wide Reverse Dependency Discovery)
 
-ADP enables “downsweeps”:
-Given a vulnerable digest, OriGen can:
+Given a vulnerable digest:
 
-1. identify the manifest commit that introduced it
-2. discover all Maps referencing that commit
-3. enumerate every affected workflow
+1. identify its manifest commit
+2. find all Maps referencing that commit
+3. enumerate all dependent workflows
 4. generate automated PRs
-5. produce impact and remediation reports
+5. produce impact & remediation reports
 
-Downsweep turns security from reactive to mechanical.
-
----
-
-## Getting Started
-
-OriGen is in early development.
-The architecture is public and stable; the codebase will follow.
-
-For now, start with:
-
-➡ **[Primer](https://origen-hub.github.io/origen-core-public/overview/origen-primer/)**
-
-➡ **[Values](https://origen-hub.github.io/origen-core-public/overview/value-statement/)**
+Downsweep turns supply-chain security into a **mechanical process**.
 
 ---
 
-## Intrigued?
+## 🧩 What OriGen Is *Not*
 
-OriGen is small, but the consequences are large.
+OriGen is not:
 
-If you want to understand *why the system behaves the way it does*, begin here:
+* an orchestrator
+* a CI/CD runner
+* a templating engine
+* a workflow wrapper
+* a platform-specific DSL
+* a runtime or scheduler
 
-➡ **[Top-Level Architecture](https://origen-hub.github.io/origen-core-public/architecture/00-top-level/)**
+OriGen is the **planner** above all of those.
 
+---
+
+## 🧠 Why This Layer Matters
+
+Modern workflows drift because:
+
+* toolchains mutate
+* CI YAML diverges
+* glue scripts sprawl
+* environments leak state
+* workflow intent is scattered
+
+OriGen provides:
+
+* deterministic structure
+* frozen toolchains
+* portable workflow intent
+* reproducible failures
+* reviewable IR
+* backend neutrality
+
+You cannot reason about a workflow until you can describe it deterministically and independent of runtime.
 
 
 ---
 
-## Status
+## 🚀 Getting Started
 
-OriGen is actively being developed.
-Public docs are available; the public codebase will follow.
+Published [documentation](https://origen-hub.github.io/origen-core-public/pages/vocabulary/). Start with:
 
----
+* **Primer**
+* **Value Statement**
+* **Top-Level Architecture**
+* **Zero-Trust by Design**
+* **Automatic Digital Provenance (ADP)**
 
-## Contributing
-
-OriGen is in its early architectural phase.
-The implementation is private while the core model, documentation,
-and specifications stabilize.
-
-You can contribute today by:
-
-- opening issues
-- proposing improvements to the documentation
-- participating in design and security discussions
-- suggesting Navigator / Backpack use cases
-- reviewing concepts like Zero-Trust, ADP, and Downsweep
-
-Code contributions will open once the public implementation is ready.
+These form the stable conceptual foundation.
 
 ---
 
-## License
+## 📌 Project Status
 
-Apache 2.0 unless otherwise noted.
+Early stage, architecture-first.
 
-```
+The public docs are stable; implementation is being built carefully to preserve invariants.
+
+
+---
+
+## 🤝 Contributing
+
+For now:
+
+* open issues
+* propose doc improvements
+* discuss architectural topics
+* review Zero-Trust / ADP / Downsweep ideas
+
+Implementation contributions will open once IR & schemas are finalized.
+
+---
+
+## 📜 License
+
+Apache 2.0 unless noted otherwise.
