@@ -25,7 +25,7 @@ Everything else in the docs is just the surface expression of that.
 
 OriGen quietly solves the unsolved problem in modern computing:
 
-> **You cannot reason about a workflow until you can describe it fully, deterministically, and independent of runtime.**
+> **You cannot reason about a workflow robustly until you can describe it fully, deterministically, and independent of runtime.**
 
 Everyone else starts from execution.
 OriGen starts from **intent**.

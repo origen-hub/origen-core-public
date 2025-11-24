@@ -1,196 +1,120 @@
-# 📚 OriGen Glossary
+# Glossary
 
-A reference list of all core terms and concepts used across the OriGen documentation.
-This glossary is domain-agnostic and reflects the finalized terminology model: **Maps → Route → Guide**, supported by **Navigators** and **Backpacks**.
+## A
 
----
+### Automatic Digital Provenance (ADP)
+The emergent provenance graph produced from Maps, Navigators, Backpacks, Papyrus validation, and IR Routes.
+ADP tracks all immutable, planning-time resources and semantics.
+Cargo is explicitly excluded from ADP.
 
-# A
+## B
 
-### **Adapter**
+### Backpack
+An immutable, externally provided resource required during planning.
+Backpacks are fully known at planning time, versioned or hashed, read-only, and included in ADP.
+They must not be created or modified at runtime.
 
-See **Guide**. A component that translates a Route into native execution artifacts for a specific runtime or platform.
+### Backends (Execution Environments)
+External systems that execute the backend-native files produced by a Guide.
+Backends own all runtime behavior, resource provisioning, and secret management.
+OriGen responsibility ends at the Execution Boundary.
 
----
+## C
 
-# B
+### Cargo
+Data produced or modified at runtime.
+Cargo is mutable, ephemeral, backend-owned, and not part of determinism or ADP.
+Cargo edges form the runtime dataflow graph and are distinct from Backpacks.
 
-### **Backpack**
+### Compass
+OriGen’s deterministic planner.
+Consumes a Map and its Navigators, validates against Papyrus, resolves Backpacks, and produces a fully typed IR Route.
+Performs pure planning only, with no execution or environment discovery.
 
-An **immutable, versioned, read-only resource bundle** carried into execution.
-Contains static dependencies such as templates, datasets, fonts, configs, metadata, or any other deterministic material.
-Backpacks are pinned by digest, never mutated, and never produced by Steps.
+### Conformance
+The requirement that Guides, Navigators, Papyrus dialects, Dictionaries, and Extensions adhere to the IR specification and determinism model.
+Necessary for backend interoperability and ecosystem stability.
 
-### **Cargo**
+## D
 
-Any output produced by a Step — files, directories, images, binaries, datasets, or generated artifacts.
-Cargo is mutable and may be consumed by later Steps.
+### Determinism
+Guarantee that IR Routes and backend-native outputs are identical for identical inputs.
+Determinism applies only to planning and file emission, not to runtime execution or external system behavior.
 
----
+### Dialect (Papyrus Dialect)
+See Papyrus.
 
-# C
+### Dictionary
+A vendor-authored vocabulary that maps Papyrus and IR semantics into backend-native constructs.
+Dictionaries evolve independently of OriGen core and must declare compatibility with specific Papyrus versions.
+They allow vendors to extend backend behavior without implementing their own Guide.
 
-### **Compass**
+## E
 
-OriGen’s core planning engine.
-Loads Maps, Navigators, and Backpacks; resolves dependencies; validates structure; and compiles the workflow into a deterministic **Route**.
-The Compass performs **pure planning only**: no execution, discovery, or environment interaction.
-
-### **Commit Reference**
-
-A Git commit hash recorded in a Map or manifest to bind a workflow to a specific version of a Navigator, Backpack, or build manifest.
-Used heavily in ADP and downsweep.
-
----
-
-# D
-
-### **Determinism**
-
-A first-class architectural constraint.
-Identical inputs must produce identical outputs **and** identical failures across all backends and environments.
-
-### **Digest**
-
-A content-addressed identifier (typically OCI-style) used to pin toolchains, Backpacks, or other resources.
-Provides immutability and guarantees that upstream drift cannot alter execution.
-
-### **Downsweep**
-
-An organizational-scale capability enabled by ADP.
-Triggered when a vulnerable or outdated digest is found.
-Locates every Map referencing the corresponding commit, enumerates dependent workflows, and generates automated updates or remediation reports.
-
----
-
-# E
-
-### **Execution Boundary**
-
+### Execution Boundary
 The point where OriGen stops.
-Beyond this boundary, external runtimes (CI systems, orchestrators, VMs, embedded platforms, etc.) execute the artifacts emitted by Guides.
+After generating backend-native files, OriGen performs no execution, validation, or environment interaction.
+All runtime concerns belong to the backend.
 
----
+### Extension (Papyrus Extension)
+A vendor-authored, namespaced semantic augmentation to a Papyrus dialect.
+Extensions do not modify core semantics, are safe to ignore by unsupported backends, and may be promoted into Papyrus through RFC.
 
-# G
+## G
 
-### **Guide**
+### Guide
+The translator that converts IR Routes into backend-native configuration using backend Dictionaries.
+Guides do not execute workflows or define backend behavior.
+They reflect Papyrus, IR, Navigator constraints, and vendor Extensions.
 
-A backend adapter that converts a Route into native execution artifacts (Kubernetes manifests, CI jobs, Podman commands, VM task files, embedded-runner scripts, etc.).
-Guides **translate**, never execute.
+## I
 
----
+### IR (Intermediate Representation)
+A fully typed, deterministic, backend-independent representation of Workflow Intent.
+Routes contain no backend-specific fields and form the provenance graph for ADP.
 
-# I
+## M
 
-### **Immutable Intent**
+### Map
+A declarative expression of Workflow Intent.
+Contains Steps, dependencies, arguments, Backpack references, and optional Extensions.
+Does not express execution mechanics or backend-specific behavior.
 
-The complete, backend-neutral representation of a workflow as encoded in the Route.
-Once produced, intent cannot mutate downstream.
+## N
 
-### **Intermediate Representation (IR)**
+### Navigator
+A pinned, immutable specification of how Steps are realized with a particular toolchain.
+Defines behavior templates, required Backpacks, and Step-to-Papyrus mappings.
+Cannot define new Papyrus types or alter core semantics.
 
-See **Route**.
+## P
 
----
+### Papyrus
+The semantic substrate that defines workflow meaning.
+A Papyrus dialect specifies Step types, retry semantics, isolation rules, Cargo behavior, workspace semantics, and determinism constraints.
+Not user-editable; evolution occurs through RFC and versioning.
 
-# M
+### Papyri
+The complete family of Papyrus dialects.
 
-### **Map**
+## R
 
-A declarative specification of workflow intent.
-Defines Steps, tools, modes, I/O relationships, and dependencies.
-Maps contain **no imperative code** and serve as the human-authored source of truth.
+### Retry Semantics
+Dialect-defined rules for retrying Steps.
+Part of Papyrus; cannot be altered by Maps, Navigators, or Guides.
 
----
+### Route (IR Route)
+The output of the Compass: a fully validated, typed, deterministic representation of Workflow Intent.
+Backend-agnostic and stable across toolchains and environments.
 
-# N
+## U
 
-### **Navigator**
+### Upstream Drift
+Any mutation of tools, defaults, images, or external environments that would normally destabilize workflow reproducibility.
+OriGen neutralizes upstream drift through pinned toolchains and pure planning.
 
-A pinned tool definition describing how a tool behaves: container/VM image (or other runnable form), entrypoint, modes, argument templates, and required Backpacks.
-Navigators decouple tool definitions from workflow logic.
+## W
 
----
-
-# O
-
-### **OriGen**
-
-A deterministic workflow compiler.
-Produces a stable, reviewable, platform-agnostic Route from declarative Maps.
-OriGen does not run workflows — it plans them.
-
----
-
-# P
-
-### **Pure Planning**
-
-A hard guarantee that OriGen performs **no execution**, **no discovery**, and **no I/O** during planning.
-All behavior is explicit and determined by Maps + Navigators + Backpacks.
-
-### **Provenance (Automatic Digital Provenance, ADP)**
-
-The structural property where toolchain lineage, workflow definitions, and execution intent can be reconstructed mechanically from Git and digests, without additional instrumentation.
-ADP emerges naturally from OriGen’s determinism and immutability.
-
----
-
-# R
-
-### **Route**
-
-OriGen’s canonical **Intermediate Representation (IR)** — a deterministic, platform-neutral execution graph compiled from a Map.
-Encodes workflow structure, dependencies, toolchains, and immutable intent.
-Consumed by Guides.
-
----
-
-# S
-
-### **Schema**
-
-The formal definition that validates Maps, Navigators, Backpacks, and Route structures.
-Ensures that workflow intent is unambiguous and stable.
-
-### **Sidecar (Deprecated Term)**
-
-A legacy term referring to what are now called Backpacks.
-Remains in older discussions or prototypes but should not appear in current documentation.
-
-### **Step**
-
-The smallest unit of execution in a workflow.
-Each Step invokes a Navigator in a specific mode with defined inputs and outputs.
-
----
-
-# T
-
-### **Topology**
-
-The dependency structure of a workflow: ordering, fan-in, fan-out, and graph shape.
-The Compass resolves topology strictly and deterministically.
-
----
-
-# U
-
-### **Upstream Drift**
-
-Changes introduced by external systems (toolchain upgrades, default changes, environment mutations) that normally cause inconsistent workflows.
-OriGen prevents drift through digest pinning and immutable artifact definitions.
-
----
-
-# W
-
-### **Workflow Intent**
-
-The high-level description of what should happen in a workflow — steps, tools, dependencies, outcomes — independent of environment or runtime.
-Captured in Maps and frozen into the Route.
-
----
-
-End of glossary.
+### Workflow Intent
+The high-level description of what a workflow should accomplish.
+Encoded in a Map; validated through Papyrus; realized through a Route.

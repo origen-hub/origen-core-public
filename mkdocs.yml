@@ -29,13 +29,19 @@ markdown_extensions:
   - md_in_html
 
 nav:
-  - Home: index.md
-  - Vocabulary: pages/vocabulary.md
+  - What is OriGen: index.md
+  - Navigation Vocabulary: pages/navigation_vocabulary.md
   - Primer: overview/origen-primer.md
   - Value Statement: overview/value-statement.md
   - Zero-Trust-by-Design: security/zero-trust-by-design.md
   - ADP: security/adp/automatic-digital-provenance.md
-  - Architecture: architecture/00-top-level.md
+  - Architecture:
+    - High-Level overview: architecture/00_overview.md
+    - Contracts: architecture/01_contracts.md
+    - Papyrus Specification: architecture/03_papyrus_specification.md
+    - Versioning: architecture/15_versioning_evolution.md
+    - Papyrus Extensions: architecture/16_papyrus_extensions.md
+    - Governance Principles: architecture/17_governance_principles.md
   - About: pages/about.md
   - Glossary: pages/glossary.md
   - FAQ: pages/faq.md
